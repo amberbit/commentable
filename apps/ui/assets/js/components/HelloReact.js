@@ -6,23 +6,13 @@ import gql from "graphql-tag";
 import client from "../client";
 
 const Comments = () => (
-  <Query
-    query={gql`
-      {
-        comments {
-          id
-          content
-        }
-      }
-    `}
-  >
+  <Query query={COMMENTS_QUERY}>
     {({ loading, error, data }) => {
       if (loading) return <p>Loading...</p>;
       if (error) return <p>Error :(</p>;
 
       return data.comments.map(({ id, content }) => (
-        <div key={id}>{content}
-        </div>
+        <div key={id}>{content}</div>
       ));
     }}
   </Query>
@@ -36,3 +26,12 @@ const HelloReact = () => (
 );
 
 export default HelloReact;
+
+const COMMENTS_QUERY = gql`
+  {
+    comments {
+      id
+      content
+    }
+  }
+`
