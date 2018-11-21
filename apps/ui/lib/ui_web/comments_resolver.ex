@@ -1,7 +1,7 @@
 defmodule UiWeb.CommentsResolver do
   @fake_db %{
     "comments" => [
-      %{id: 1, content: "Hello!"},
+      %{id: 1, content: "First!"},
       %{id: 2, content: "Hi"}
     ]
   }

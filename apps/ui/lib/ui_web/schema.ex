@@ -9,7 +9,7 @@ defmodule UiWeb.Schema do
   end
 
   query do
-    field :all_comments, list_of(non_null(:comment)) do
+    field :comments, list_of(non_null(:comment)) do
       resolve(&CommentsResolver.all_comments/3)
     end
   end
