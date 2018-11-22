@@ -17,12 +17,8 @@ defmodule Ui.WallabyCase do
   setup _tags do
     :ok = Ecto.Adapters.SQL.Sandbox.checkout(Ui.Repo)
 
-    # unless tags[:async] do
     Ecto.Adapters.SQL.Sandbox.mode(Ui.Repo, {:shared, self()})
-    # end
 
-    # metadata = Phoenix.Ecto.SQL.Sandbox.metadata_for(Ui.Repo, self())
-    # {:ok, session} = Wallaby.start_session(metadata: metadata)
     {:ok, session} = Wallaby.start_session()
     {:ok, session: session}
   end
