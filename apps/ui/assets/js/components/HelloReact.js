@@ -6,21 +6,23 @@ import gql from "graphql-tag";
 import client from "../client";
 
 const Comments = () => (
-  <Query query={COMMENTS_QUERY}>
-    {({ loading, error, data }) => {
-      if (loading) return <p>Loading...</p>;
-      if (error) return <p>Error :(</p>;
+  <div className="comments">
+    <h2>Comments:</h2>
+    <Query query={COMMENTS_QUERY}>
+      {({ loading, error, data }) => {
+        if (loading) return <p>Loading...</p>;
+        if (error) return <p>Error :(</p>;
 
-      return data.comments.map(({ id, content }) => (
-        <div key={id}>{content}</div>
-      ));
-    }}
-  </Query>
+        return data.comments.map(({ id, content }) => (
+          <div key={id} className="comment">{content}</div>
+        ));
+      }}
+    </Query>
+  </div>
 );
 
 const HelloReact = () => (
   <ApolloProvider client={client}>
-    <h2>Comments:</h2>
     <Comments />
   </ApolloProvider>
 );

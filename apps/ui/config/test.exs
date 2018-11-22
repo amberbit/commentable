@@ -4,7 +4,9 @@ use Mix.Config
 # you can enable the server option below.
 config :ui, UiWeb.Endpoint,
   http: [port: 4002],
-  server: false
+  server: true
+
+config :ui, :sql_sandbox, true
 
 # Print only warnings and errors during test
 config :logger, level: :warn
@@ -16,3 +18,9 @@ config :ui, Ui.Repo,
   database: "ui_test",
   hostname: "localhost",
   pool: Ecto.Adapters.SQL.Sandbox
+
+# Configure wallaby
+
+config :wallaby,
+  driver: Wallaby.Experimental.Chrome,
+  chrome: [headless: true]
