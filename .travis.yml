@@ -1,0 +1,22 @@
+language: elixir
+elixir:
+  - '1.7.4'
+otp_release:
+  - '21.1'
+node_js:
+  - '10.13.0'
+
+addons:
+  postgresql: '10.0'
+
+services:
+  - postgresql
+
+before_script:
+  - cp apps/ui/config/travis_test.exs apps/ui/config/test.exs
+  - mix deps.get
+  - cd apps/ui/assets && npm install && cd ../../..
+  - mix do ecto.create, ecto.migrate
+
+script:
+  - mix test
