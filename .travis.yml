@@ -12,10 +12,13 @@ addons:
 services:
   - postgresql
 
+env:
+  - MIX_ENV=test
+
 before_script:
   - cp apps/ui/config/travis_test.exs apps/ui/config/test.exs
   - mix deps.get
-  - cd apps/ui/assets && npm install && cd ../../..
+  - cd apps/ui/assets && npm install && cd ..
   - mix do ecto.create, ecto.migrate
 
 script:

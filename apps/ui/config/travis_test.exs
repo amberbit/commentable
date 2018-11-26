@@ -13,6 +13,7 @@ config :logger, level: :warn
 
 # Configure your database
 config :ui, Ui.Repo,
+  adapter:  Ecto.Adapters.Postgres,
   username: "postgres",
   password: "",
   database: "ui_test",
