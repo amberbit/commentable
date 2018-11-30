@@ -15,4 +15,13 @@ import "phoenix_html"
 // Local files can be imported directly using relative paths, for example:
 // import socket from "./socket"
 
-import "./hello-react"
+import "./commentable-widget"
+
+function receiver(e) {
+  switch (e.data) {
+    case "resize-me":
+      const height = document.getElementById("commentable-widget").offsetHeight;
+      window.parent.postMessage({height: height}, e.origin);
+  }
+}
+window.addEventListener("message", receiver, false);
