@@ -15,7 +15,6 @@ config :logger, level: :warn
 config :ui, Ui.Repo,
   adapter:  Ecto.Adapters.Postgres,
   username: "postgres",
-  password: "",
   database: "ui_test",
   hostname: "localhost",
   pool: Ecto.Adapters.SQL.Sandbox

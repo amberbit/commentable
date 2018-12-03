@@ -13,13 +13,15 @@ services:
   - postgresql
 
 env:
+  global:
+  - PGPORT=5432
   - MIX_ENV=test
 
 before_script:
   - cp apps/ui/config/travis_test.exs apps/ui/config/test.exs
-  - mix deps.get
+  - MIX_ENV=test mix deps.get
   - cd apps/ui/assets && npm install && cd ..
-  - mix do ecto.create, ecto.migrate
+  - MIX_ENV=test mix do ecto.create, ecto.migrate
 
 script:
   - mix test
