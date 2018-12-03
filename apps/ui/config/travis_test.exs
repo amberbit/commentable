@@ -15,7 +15,7 @@ config :logger, level: :warn
 config :ui, Ui.Repo,
   adapter:  Ecto.Adapters.Postgres,
   username: "postgres",
-  password: "",
+  password: nil,
   database: "ui_test",
   hostname: "localhost",
   port: 5433,
