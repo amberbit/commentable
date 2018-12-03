@@ -18,6 +18,7 @@ config :ui, Ui.Repo,
   password: "",
   database: "ui_test",
   hostname: "localhost",
+  port: 5433,
   pool: Ecto.Adapters.SQL.Sandbox
 
 # Configure wallaby
