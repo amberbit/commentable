@@ -18,7 +18,7 @@ config :ui, Ui.Repo,
   password: "",
   database: "commentable_test",
   hostname: "localhost",
-  port: 5433,
+  port: 5432,
   pool: Ecto.Adapters.SQL.Sandbox,
   show_sensitive_data_on_connection_error: true
 
