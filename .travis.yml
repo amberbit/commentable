@@ -42,7 +42,7 @@ before_script:
   - sudo service postgresql restart
   - cp apps/ui/config/travis_test.exs apps/ui/config/test.exs
   - mix deps.get
-  - cd apps/ui/assets && npm install && cd ..
+  - cd apps/ui/assets && npm install && npm run deploy && cd ..
   - psql -c 'create database commentable_test;' -U postgres
   - mix ecto.migrate
 
