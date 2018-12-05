@@ -8,13 +8,13 @@ import client from "../client";
 const Comments = () => (
   <div className="comments">
     <h2>Comments:</h2>
-    <Query query={COMMENTS_QUERY}>
+    <Query query={THREADS_QUERY}>
       {({ loading, error, data }) => {
         if (loading) return <p>Loading...</p>;
         if (error) return <p>Error :(</p>;
 
-        return data.comments.map(({ id, content }) => (
-          <div key={id} className="comment">{content}</div>
+        return data.threads.map(({ id, url }) => (
+          <div key={id} className="comment">{url}</div>
         ));
       }}
     </Query>
@@ -34,6 +34,19 @@ const COMMENTS_QUERY = gql`
     comments {
       id
       content
+    }
+  }
+`
+
+const THREADS_QUERY = gql`
+  {
+    threads {
+      id
+      url
+      comments {
+        id
+        content
+      }
     }
   }
 `

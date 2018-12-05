@@ -11,7 +11,7 @@ defmodule Ui.ListComments do
   Returns a list of comments.
 
   """
-  def all_comments() do
+  def list_comments() do
     from(c in Ui.Comment)
     |> Ui.Repo.all()
   end

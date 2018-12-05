@@ -1,5 +1,9 @@
 defmodule UiWeb.Resolver do
-  def all_comments(_root, _args, _info) do
-    {:ok, Ui.ListComments.all_comments()}
+  def list_comments(_root, _args, _info) do
+    {:ok, Ui.ListComments.list_comments()}
+  end
+
+  def list_threads(_root, _args, _info) do
+    {:ok, Ui.ListThreads.list_threads()}
   end
 end

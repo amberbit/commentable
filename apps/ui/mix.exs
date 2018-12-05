@@ -51,7 +51,8 @@ defmodule Ui.MixProject do
       {:absinthe_phoenix, "~> 1.4.3"},
       {:absinthe_plug, "~> 1.4.5"},
       {:wallaby, "~> 0.20.0", only: :test, runtime: false},
-      {:mix_test_watch, "~> 0.8", only: :dev, runtime: false}
+      {:mix_test_watch, "~> 0.8", only: :dev, runtime: false},
+      {:dataloader, "~> 1.0.0"}
     ]
   end
 
