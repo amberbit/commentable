@@ -4,7 +4,7 @@ var container = document.getElementById("commentable-thread");
 iframe.style.width = `${container.offsetWidth}px`
 iframe.style.height = "0px";
 iframe.style.border = "none";
-iframe.setAttribute("src", `https://localhost:4001?href=${window.location.href}`);
+iframe.setAttribute("src", `https://localhost:4001?url=${window.location.href}`);
 
 function receiver(e) {
   switch (e.origin) {

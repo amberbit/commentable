@@ -9,10 +9,10 @@ defmodule Ui.CreateThread do
   Returns created thread.
 
   """
-  def create_thread(args) do
+  def create_thread(url) do
     %Ui.Thread{}
     |> Ui.Thread.changeset(%{
-      url: args[:url]
+      url: url
     })
     |> Ui.Repo.insert()
   end

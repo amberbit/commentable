@@ -2,9 +2,13 @@ defmodule UiWeb.Schema.ThreadsQueries do
   use Absinthe.Schema.Notation
 
   object :threads_queries do
-    @desc "Get all threads"
-    field :threads, list_of(non_null(:thread)) do
-      resolve(&UiWeb.Resolver.list_threads/3)
+    @desc "Get thread by url"
+    field :thread, :thread do
+      arg(:url, non_null(:string))
+
+      resolve(fn _, %{url: url}, %{context: _} ->
+        Ui.FindThread.find_thread(url)
+      end)
     end
   end
 
@@ -13,8 +17,8 @@ defmodule UiWeb.Schema.ThreadsQueries do
     field :create_thread, type: :thread do
       arg(:url, non_null(:string))
 
-      resolve(fn _, args, %{context: _} ->
-        Ui.CreateThread.create_thread(args)
+      resolve(fn _, %{url: url}, %{context: _} ->
+        Ui.CreateThread.create_thread(url)
       end)
     end
   end
