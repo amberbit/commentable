@@ -7,25 +7,25 @@ import queryString from 'query-string';
 import client from "../client";
 
 const Comments = () => (
-  <Query query={GET_THREAD} variables={{ url: queryString.parse(window.location.search).url }}>
-    {({ loading, error, data }) => {
-      if (loading) return <p>Loading...</p>;
-      if (error) return <p>Error :(</p>;
+  <div className="comments">
+    <Query query={GET_THREAD} variables={{ url: queryString.parse(window.location.search).url }}>
+      {({ loading, error, data }) => {
+        if (loading) return <p>Loading...</p>;
+        if (error) return <p>Error :(</p>;
 
-      return (
-        <div className="comments">
-          <AddComment thread={data.thread} />
-
-          <h2>{data.thread.comments.length} comment(s):</h2>
+        return (
           <div className="comments-list">
+            <AddComment thread={data.thread} />
+
+            <h2>{data.thread.comments.length} comment(s):</h2>
             { data.thread.comments.map(({ id, content }) => (
               <div key={id} className="comment">{content}</div>
             ))}
           </div>
-        </div>
-      )
-    }}
-  </Query>
+        )
+      }}
+    </Query>
+  </div>
 );
 
 const AddComment = ({thread}) => {

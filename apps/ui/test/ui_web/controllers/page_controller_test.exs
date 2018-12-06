@@ -6,7 +6,7 @@ defmodule UiWeb.PageControllerTest do
   test "comments list is empty", %{session: session} do
     session
     |> visit("/")
-    |> assert_has(css(".comments", text: "Comments:"))
+    |> assert_has(css(".comments", count: 1))
     |> find(css(".comment", count: 0))
   end
 end
