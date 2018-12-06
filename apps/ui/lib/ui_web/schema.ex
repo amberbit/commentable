@@ -9,11 +9,11 @@ defmodule UiWeb.Schema do
 
   query do
     import_fields(:threads_queries)
-    import_fields(:comments_queries)
   end
 
   mutation do
     import_fields(:threads_mutations)
+    import_fields(:comments_mutations)
   end
 
   def context(ctx) do

@@ -1,12 +1,12 @@
 defmodule Ui.CreateThread do
   @moduledoc """
-    This is the service for creating threads.
+    This is the service for creating thread.
   """
 
   @doc """
-  Creates thread with given args.
+  Creates thread with with given url.
 
-  Returns created thread.
+  Returns `{:ok, thread}` on success.
 
   """
   def create_thread(url) do
