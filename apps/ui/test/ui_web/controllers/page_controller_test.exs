@@ -1,8 +1,12 @@
 defmodule UiWeb.PageControllerTest do
-  use UiWeb.ConnCase
+  use Ui.WallabyCase, async: true
 
-  test "GET /", %{conn: conn} do
-    conn = get(conn, "/")
-    assert html_response(conn, 200) =~ "hello-react"
+  import Wallaby.Query, only: [css: 2]
+
+  test "comments list is empty", %{session: session} do
+    session
+    |> visit("/")
+    |> assert_has(css(".comments", text: "Comments:"))
+    |> find(css(".comment", count: 0))
   end
 end

@@ -49,7 +49,9 @@ defmodule Ui.MixProject do
       {:plug_cowboy, "~> 2.0"},
       {:absinthe, "~> 1.4.13"},
       {:absinthe_phoenix, "~> 1.4.3"},
-      {:absinthe_plug, "~> 1.4.5"}
+      {:absinthe_plug, "~> 1.4.5"},
+      {:wallaby, "~> 0.20.0", only: :test, runtime: false},
+      {:mix_test_watch, "~> 0.8", only: :dev, runtime: false}
     ]
   end
 

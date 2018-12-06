@@ -13,11 +13,14 @@ config :logger, level: :warn
 
 # Configure your database
 config :ui, Ui.Repo,
+  adapter:  Ecto.Adapters.Postgres,
   username: "postgres",
-  password: "postgres",
-  database: "ui_test",
+  password: "",
+  database: "commentable_test",
   hostname: "localhost",
-  pool: Ecto.Adapters.SQL.Sandbox
+  port: 5432,
+  pool: Ecto.Adapters.SQL.Sandbox,
+  show_sensitive_data_on_connection_error: true
 
 # Configure wallaby
 
