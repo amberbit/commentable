@@ -37,23 +37,21 @@ const AddComment = ({thread}) => {
         const { thread: { comments } } = cache.readQuery({ query: GET_THREAD, variables: { url: thread.url } });
         cache.writeQuery({
           query: GET_THREAD,
-          data: { thread: { ...thread, comments: comments.concat([createComment]) } }
+          data: { thread: { ...thread, comments: [createComment].concat(comments) } }
         });
+      }}
+      onCompleted={() => {
+        const height = document.getElementById("commentable-widget").offsetHeight;
+        window.parent.postMessage({height: height}, thread.url);
       }}>
       {(createComment, { data }) => (
-        <div>
-          <form
-            onSubmit={e => {
+        <div className="add-comment">
+          <form onSubmit={e => {
               e.preventDefault();
               createComment({ variables: { content: input.value, threadId: parseInt(thread.id) } });
               input.value = "";
-            }}
-          >
-            <input
-              ref={node => {
-                input = node;
-              }}
-            />
+            }}>
+            <input ref={node => {input = node}} />
             <button type="submit">Add Comment</button>
           </form>
         </div>
