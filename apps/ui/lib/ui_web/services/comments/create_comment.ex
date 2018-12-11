@@ -3,6 +3,8 @@ defmodule Ui.CreateComment do
     This is the service for creating comment.
   """
 
+  import Ecto.Query
+
   @doc """
   Creates comment with given args.
 
@@ -10,10 +12,17 @@ defmodule Ui.CreateComment do
 
   """
   def create_comment(args) do
+    thread =
+      from(
+        t in Ui.Thread,
+        where: t.url == ^args[:url]
+      )
+      |> Ui.Repo.one()
+
     %Ui.Comment{}
     |> Ui.Comment.changeset(%{
       content: args[:content],
-      thread_id: args[:thread_id]
+      thread_id: thread.id
     })
     |> Ui.Repo.insert()
   end

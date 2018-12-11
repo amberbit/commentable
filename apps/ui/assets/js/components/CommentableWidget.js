@@ -6,49 +6,53 @@ import queryString from 'query-string';
 
 import client from "../client";
 
-const Comments = () => (
-  <div className="comments">
-    <Query query={GET_THREAD} variables={{ url: queryString.parse(window.location.search).url }}>
-      {({ loading, error, data }) => {
-        if (loading) return <p>Loading...</p>;
-        if (error) return <p>Error :(</p>;
+const Comments = () => {
+  const { url } = queryString.parse(window.location.search);
 
-        return (
-          <div className="comments-list">
-            <AddComment thread={data.thread} />
+  return (
+    <div className="comments">
+      <Query query={GET_COMMENTS} variables={{ url }}>
+        {({ loading, error, data }) => {
+          if (loading) return <p>Loading...</p>;
+          if (error) return <p>Error :(</p>;
 
-            <h2>{data.thread.comments.length} comment(s):</h2>
-            { data.thread.comments.map(({ id, content }) => (
-              <div key={id} className="comment">{content}</div>
-            ))}
-          </div>
-        )
-      }}
-    </Query>
-  </div>
-);
+          return (
+            <div className="comments-list">
+              <AddComment url={url} />
 
-const AddComment = ({thread}) => {
+              <h2>{data.comments.length} comment(s):</h2>
+              { data.comments.map(({ id, content }) => (
+                <div key={id} className="comment">{content}</div>
+              ))}
+            </div>
+          )
+        }}
+      </Query>
+    </div>
+  );
+};
+
+const AddComment = ({url}) => {
   let input;
 
   return (
     <Mutation mutation={CREATE_COMMENT}
       update={(cache, { data: { createComment } }) => {
-        const { thread: { comments } } = cache.readQuery({ query: GET_THREAD, variables: { url: thread.url } });
+        const { comments } = cache.readQuery({ query: GET_COMMENTS, variables: { url } });
         cache.writeQuery({
-          query: GET_THREAD,
-          data: { thread: { ...thread, comments: [createComment].concat(comments) } }
+          query: GET_COMMENTS, variables: {url},
+          data: { comments: [createComment].concat(comments) }
         });
       }}
       onCompleted={() => {
         const height = document.getElementById("commentable-widget").offsetHeight;
-        window.parent.postMessage({height: height}, thread.url);
+        window.parent.postMessage({"x-commentable-message-height": height}, url);
       }}>
       {(createComment, { data }) => (
         <div className="add-comment">
           <form onSubmit={e => {
               e.preventDefault();
-              createComment({ variables: { content: input.value, threadId: parseInt(thread.id) } });
+              createComment({ variables: { content: input.value, url } });
               input.value = "";
             }}>
             <input ref={node => {input = node}} />
@@ -68,22 +72,18 @@ const CommentableWidget = () => (
 
 export default CommentableWidget;
 
-const GET_THREAD = gql`
-  query thread($url: String!) {
-    thread(url: $url) {
+const GET_COMMENTS = gql`
+  query comments($url: String!) {
+    comments(url: $url) {
       id
-      url
-      comments {
-        id
-        content
-      }
+      content
     }
   }
 `;
 
 const CREATE_COMMENT = gql`
-  mutation createComment($content: String!, $threadId: Int!) {
-    createComment(content: $content, thread_id: $threadId) {
+  mutation createComment($content: String!, $url: String!) {
+    createComment(content: $content, url: $url) {
       id
       content
     }
