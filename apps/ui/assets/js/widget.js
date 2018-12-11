@@ -1,3 +1,5 @@
+var url = document.currentScript.src.replace("/js/widget.js", "");
+
 var container = document.createElement("div");
 container.setAttribute("id", "commentable-thread");
 document.currentScript.parentNode.insertBefore(container, document.currentScript);
@@ -7,7 +9,7 @@ var iframe = document.createElement("iframe");
 iframe.style.width = `${container.offsetWidth}px`
 iframe.style.height = "0px";
 iframe.style.border = "none";
-iframe.setAttribute("src", `https://localhost:4001?href=${window.location.href}`);
+iframe.setAttribute("src", `${url}?href=${window.location.href}`);
 
 function receiver(e) {
   if (e.data["x-commentable-message-height"] !== undefined) {
