@@ -55,8 +55,8 @@ const AddComment = ({url}) => {
               createComment({ variables: { content: input.value, url } });
               input.value = "";
             }}>
-            <input ref={node => {input = node}} />
-            <button type="submit">Add Comment</button>
+            <input ref={node => {input = node}} placeholder="Comment" />
+            <button type="submit">Add comment</button>
           </form>
         </div>
       )}
