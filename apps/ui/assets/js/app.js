@@ -19,9 +19,10 @@ import "./commentable-widget"
 
 function receiver(e) {
   switch (e.data) {
-    case "resize-me":
+    case "x-commentable-message-resize-me":
       const height = document.getElementById("commentable-widget").offsetHeight;
-      window.parent.postMessage({height: height}, e.origin);
+      window.parent.postMessage({"x-commentable-message-height": height}, e.origin);
   }
 }
+
 window.addEventListener("message", receiver, false);
