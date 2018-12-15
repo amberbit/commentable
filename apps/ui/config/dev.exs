@@ -8,6 +8,11 @@ use Mix.Config
 # with webpack to recompile .js and .css sources.
 config :ui, UiWeb.Endpoint,
   http: [port: 4000],
+  https: [
+    port: 4001,
+    keyfile: "priv/keys/dev.key",
+    certfile: "priv/keys/dev.crt"
+  ],
   debug_errors: true,
   code_reloader: true,
   check_origin: false,
