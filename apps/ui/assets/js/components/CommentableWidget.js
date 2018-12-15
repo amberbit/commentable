@@ -21,13 +21,13 @@ const Comments = () => (
   </div>
 );
 
-const HelloReact = () => (
+const CommentableWidget = () => (
   <ApolloProvider client={client}>
     <Comments />
   </ApolloProvider>
 );
 
-export default HelloReact;
+export default CommentableWidget;
 
 const COMMENTS_QUERY = gql`
   {
