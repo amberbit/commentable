@@ -9,7 +9,7 @@ var iframe = document.createElement("iframe");
 iframe.style.width = `${container.offsetWidth}px`
 iframe.style.height = "0px";
 iframe.style.border = "none";
-iframe.setAttribute("src", `${url}?href=${window.location.href}`);
+iframe.setAttribute("src", `${url}?url=${window.location.href}`);
 
 function receiver(e) {
   if (e.data["x-commentable-message-height"] !== undefined) {
